@@ -9,7 +9,7 @@
 # Step 2: Join DM01 data to CDC data
 # This join will need to be performed based on the trust, date and test type
 # Best approach would probably be a left join, with the DM01 data as the left dataset
-# 
+
 
 
 
@@ -28,31 +28,9 @@
 
 
 # Step 5: Visualise portion of CDC activity by ICB
-# Trust is also of interest, but won't be easily visualised as there's so many of them (aside from showing a distribution, or in comparison to another variable on a scatter plot)
+# Trust level is also of interest, but won't be easily visualised as there's so many of them (aside from showing a distribution, or in comparison to another variable on a scatter plot)
 
 
-
-
-
-
-
-### QUESTION 2: HOW HAS DIAGNOSTIC ACTIVITY PER PERSON CHANGED SINCE THE INTRODUCTION OF CDCs?
-# This will need to be done on an [ICB?] level as population estimates are not available for lower geographic levels
-
-# Step 1: Download population data from NHS
-
-
-
-# Step 2: Join population data to the joined DM01/CDC data, created earlier.
-
-
-
-
-
-
-
-### QUESTION 3: HOW DO DIAGNOSTIC WAITING TIMES COMPARE BETWEEN AREAS WITH AND WITHOUT CDCs?
-## ADDITIONAL: HOW DOES THIS DIFFER BETWEEN DIFFERENT TEST TYPES?
 
 
 
