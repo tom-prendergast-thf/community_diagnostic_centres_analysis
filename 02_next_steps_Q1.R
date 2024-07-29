@@ -1,9 +1,9 @@
 
 ### QUESTION 1 continued: WHAT PORTION OF DIAGNOSTIC ACTIVITY IS ACCOUNTED FOR BY CDCs? 
 
-# Step 1: Download trust to CDC matching data 
+# Step 1: Load in trust to CDC matching data 
 
-
+cdc_trust_lookup <- read.csv('resources/CDC trust lookup.csv')
 
 
 # Step 2: Join DM01 data to CDC data
