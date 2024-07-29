@@ -11,12 +11,12 @@ DM01_data_Period_TA %>%
   data.frame() -> DM01_data_Period_TA_agg
   print(DM01_data_Period_TA_agg)
   
-  # create a visualisation of the above
+  # create a visualization of the above
   ggplot(data = DM01_data_Period_TA_agg, aes(x = Period, y = Total.Activity)) + geom_line() + labs(title='Total Diagnostic Activity Over Time', x='Year', y='Amount of Diagnostic Tests')
   
   
   
-# template to create visualisation on how tests have changed over time when grouping by type of test.
+# template to create visualization on how tests have changed over time when grouping by type of test.
     #create new df containing period, total activity and diagnostic tests columns
   DM01_data_Period_TA_DT <- select(DM01_data, 'Period', 'Total Activity', 'Diagnostic Tests')
 
@@ -46,6 +46,19 @@ DM01_data_Period_TA %>%
     summarise(Total_Activity = sum('Total Activity')) %>%
     as.data.frame()
   
-  # Print the result
-  print(DM01_data_Period_TA_DT_agg1)
+# ATTEMPT 4 - this one works. 
+  # for reference, this is the website I used (https://www.geeksforgeeks.org/group-by-function-in-r-using-dplyr/)
+# aggregating Total activity data by Type of Diagnostic Test, and Month of test.
+DM01_data_Period_TA_DT_agg = DM01_data_Period_TA_DT %>% group_by(Period, `Diagnostic Tests`) %>%
+  summarise(Diagnostic_Activity = sum(`Total Activity`), 
+            .groups = 'drop')
+view(DM01_data_Period_TA_DT_agg)
+
+# attempting to create a graph of the below.
+ggplot(data = DM01_data_Period_TA_DT_agg, aes(x = Period, y = Total.Activity, Diagnostic.Test)) + geom_line() + labs(title='Total Diagnostic Activity Over Time Per Type of Test', x='Year', y='Amount of Diagnostic Tests')
+    # the above is unhelpful -I need a multi line graph, to allow for visualisation of growth per test type.
+
+#this should createa multi lie graph, but it produces no values ???
+ggplot(DM01_data_Period_TA_DT_agg, aes(x = factor(Period), y = 'Diagnostic_Activity', colour = 'Diagnostic.Tests')) +
+  geom_line()
   
