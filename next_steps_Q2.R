@@ -11,7 +11,7 @@ ICB_populations$Total <- as.numeric(sub(',', '', sub(',', '', ICB_populations$To
 
 
 # Step 2: Join population data to the joined DM01/CDC data, created earlier.
-
+# This will need to be done on an ICB level, based on ICB codes or names (the commissioning body). Codes tend to be more reliable in case of any typos/differences in capitalisation between the ICB names in different sources.  
 
 
 
