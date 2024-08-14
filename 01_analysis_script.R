@@ -4,7 +4,7 @@
 # Packages are loaded in, folders are created and data is downloaded by the project setup script, which is loaded
 # via the source command at the beginning of this script. 
 # From there, the CDC data is selected and loaded into the workspace, then combined into a single dataframe.
-# The same is done for the DM01 data. This is very large, so an alternative version is also filtered to only 
+# The same is done for the simvastatinDM01 data. This is very large, so an alternative version is also filtered to only 
 # cover the same space of time that the CDC data covers, for ease of comparison. 
 
 source(here('00_project_setup.R'))
@@ -50,8 +50,15 @@ DM01_data <- do.call('rbind', all_DM01_data_list) %>%
 # However, the above data is massive and slow to work with - for ease of working, here's also a version which 
 # only covers the same period that the CDC data does
 
-recent_DM01_data <- DM01_data %>%
-  filter(Per > earliest_CDC_date)
+head(recent_DM01_data)
 
+### i lost the recent DM01 data so the below remakes it ###
+  #ensure period column is in date format 
+  DM01_data$Period <- as.Date(DM01_data$Period)
+  #filter to get only dates after 2023.01.01
+  recent_DM01_data <- DM01_data %>% filter(Period >= as.Date("2023-03-01"))
+  #display filtered df
+  View(recent_DM01_data)
 
-
+  save(recent_DM01_data, file = "recent_DM01_data.RData")
+  load("recent_DM01_data.RData")

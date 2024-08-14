@@ -14,7 +14,7 @@ DM01_data_Period_TA_ICB_agg = DM01_data_Period_TA_ICB %>% group_by(Period, `Prov
             .groups = 'drop')
 View(DM01_data_Period_TA_ICB_agg)
 
-# Data is now aggregated by ICB  (Provider Parent Org Code). Now, want to link it to ODS General search file that categorises Various ICB Codes into their respective 'National Regions'
+# Data is now aggregated by ICB  (Provider Parent Org Code). Now, want to link it to ODS General search file that categories Various ICB Codes into their respective 'National Regions'
 # View ODS ICB//Region FIle
 library(readr)
 ICB_National_Region_ODS <- read_csv("ODS General Search (Include headers).csv")
@@ -32,7 +32,7 @@ DM01_data_Period_TA_ICB_agg_Region_agg = DM01_data_Period_TA_ICB_agg_Region %>% 
   summarise(Diagnostic_Activity = sum(`Diagnostic_Activity`), 
             .groups = 'drop')
 View(DM01_data_Period_TA_ICB_agg_Region_agg)
-# create visualation of the above
+# create visualization of the above
 ggplot(DM01_data_Period_TA_ICB_agg_Region_agg, aes(x = `Period`, y = `Diagnostic_Activity`, colour = `National Grouping Name`)) +
   geom_line() +
   ggtitle("Comparing NHSE Diagnostic Activity Trends by Geographical Area")

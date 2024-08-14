@@ -12,53 +12,27 @@ DM01_data_Period_TA %>%
   print(DM01_data_Period_TA_agg)
   
   # create a visualization of the above
-  ggplot(data = DM01_data_Period_TA_agg, aes(x = Period, y = Total.Activity)) + geom_line() + labs(title='Total Diagnostic Activity Over Time', x='Year', y='Amount of Diagnostic Tests')
+  ggplot(data = DM01_data_Period_TA_agg, aes(x = Period, y = Total.Activity)) + geom_line() + labs(title='Exploring NHSE Diagnostic Activity Trends Over Time', x='Year', y='Amount of Diagnostic Tests')
   
   
   
 # template to create visualization on how tests have changed over time when grouping by type of test.
     #create new df containing period, total activity and diagnostic tests columns
   DM01_data_Period_TA_DT <- select(DM01_data, 'Period', 'Total Activity', 'Diagnostic Tests')
-
-# trying to find how to group by period if diagnostic test character is the same
   
-# ATTEMPT 1
-# Group by 'Period' if 'Diagnostic Tests' characters are equivalent
-  DM01_data_Period_TA_DT_agg <- DM01_data_Period_TA_DT %>%
-    group_by('Period', 'Diagnostic Tests') %>%
-      summarise(sum('Total Activity')) %>%
-  
-# Print the result
-  print(DM01_data_period_TA_DT_agg)
-# not working due to invalide (chaaracter) argument
-  
-#ATTEMPT 2
-  DM01_data_Period_TA_DT %>%
-    group_by(Period, 'Diagnostic Tests',) %>%
-    summarise(sum('Total Activity')) %>%
-    data.frame() -> DM01_data_Period_TA_DT_agg1
-  print(DM01_data_Period_TA_DT_agg1)
-  
-#ATTEMPT 3
-  # Group by similar characters in the "Diagnostic Tests" column
-  DM01_data_Period_TA_DT_agg1 <- DM01_data_Period_TA_DT %>%
-    group_by(Period, 'Diagnostic Tests') %>%
-    summarise(Total_Activity = sum('Total Activity')) %>%
-    as.data.frame()
-  
-# ATTEMPT 4 - this one works. 
+ # aggregating Total activity data by Type of Diagnostic Test, and Month of test.
   # for reference, this is the website I used (https://www.geeksforgeeks.org/group-by-function-in-r-using-dplyr/)
-# aggregating Total activity data by Type of Diagnostic Test, and Month of test.
 DM01_data_Period_TA_DT_agg = DM01_data_Period_TA_DT %>% group_by(Period, `Diagnostic Tests`) %>%
   summarise(Diagnostic_Activity = sum(`Total Activity`), 
             .groups = 'drop')
-view(DM01_data_Period_TA_DT_agg)
+View(DM01_data_Period_TA_DT_agg)
+#removing rows that show 'total' number of tests : these are not needed.
+DM01_data_Period_TA_DT_agg <- DM01_data_Period_TA_DT_agg %>%
+  filter(!grepl("total", `Diagnostic Tests`, ignore.case = TRUE))
 
-# attempting to create a graph of the below.
-ggplot(data = DM01_data_Period_TA_DT_agg, aes(x = Period, y = Total.Activity, Diagnostic.Test)) + geom_line() + labs(title='Total Diagnostic Activity Over Time Per Type of Test', x='Year', y='Amount of Diagnostic Tests')
-    # the above is unhelpful -I need a multi line graph, to allow for visualisation of growth per test type.
+#this  creates multi-line graph based upon above aggregation
+options(scipen = 999)
+ggplot(DM01_data_Period_TA_DT_agg, aes(x = Period, y = Diagnostic_Activity, colour = `Diagnostic Tests`)) +
+  geom_line() + 
+  ggtitle("Comparing NHSE Diagnostic Activity Trends by Type of Diagnostic Test")
 
-#this should createa multi lie graph, but it produces no values ???
-ggplot(DM01_data_Period_TA_DT_agg, aes(x = factor(Period), y = 'Diagnostic_Activity', colour = 'Diagnostic.Tests')) +
-  geom_line()
-  

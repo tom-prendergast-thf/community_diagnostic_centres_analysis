@@ -27,3 +27,17 @@ uniquevalues_period[order(uniquevalues_period)]
 
 #have now ordered the period values, allowing confirmation that all months are present between period of 01-01-2021 and 01-05-2024.
 
+
+#### Checks for Question 1d ####
+# checking to see why merge wont work
+#are merge columns equal?
+column_comparison <- all.equal(recent_DM01_data_agg$Period, CDC_data_agg$Period)
+print(column_comparison)
+
+column_comparison2 <-all.equal(recent_DM01_data_agg$`Diagnostic Tests`, CDC_data_agg$`Diagnostic Tests`)
+print(column_comparison2)
+
+column_comparison3 <- all.equal(recent_DM01_data_agg$`Commissioner Parent Org Code`, CDC_data_agg$`Commissioner Parent Org Code`)
+print(column_comparison3)
+#yes to all.
+

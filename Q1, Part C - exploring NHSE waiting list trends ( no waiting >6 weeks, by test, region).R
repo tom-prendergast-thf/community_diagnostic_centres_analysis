@@ -9,7 +9,7 @@ DM01_data_Period_6WeekWait_agg = DM01_data_Period_6WeekWait %>% group_by(Period)
             .groups = 'drop')
 View(DM01_data_Period_6WeekWait_agg)
 
-# Create visualation
+# Create visualization
 ggplot(DM01_data_Period_6WeekWait_agg, aes(x = `Period`, y = `06 < 07 Weeks`)) +
   geom_line() +
   ggtitle("Exploring NHSE Waiting List Trends") + 
@@ -68,4 +68,4 @@ DM01_data_Period_6WeekWait_DT_agg <- DM01_data_Period_6WeekWait_DT_agg %>%
 options(scipen = 999)
 ggplot(DM01_data_Period_6WeekWait_DT_agg, aes(x = Period, y = `06 < 07 Weeks`, colour = `Diagnostic Tests`)) +
   geom_line() + 
-  ggtitle("Comparing NHSE Waiting List Trends by Type of Diagnostic Test")
+  ggtitle("Comparing NHSE Waiting List Tr ends by Type of Diagnostic Test")
