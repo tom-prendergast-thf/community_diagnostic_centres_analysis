@@ -1,4 +1,4 @@
-### Charts reccomended by Tom
+### Charts recommended by Tom
 # 1) Layered Histogram of Wait Time Distrubtion for CDC's vs Non-CDC's.
     # Prepare data: Group, reshape, and aggregate
     Q3flagged3aggNATIONAL <- Q3flagged3 %>%
